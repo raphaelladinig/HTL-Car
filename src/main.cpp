@@ -27,28 +27,25 @@ struct Car {
     void move(int speed) {
         right.motorControl(speed);
         left.motorControl(speed);
-        Serial.print("Forward: ");
         Serial.println(speed);
     }
 
     void rotate(int speed) {
-        Serial.print("Rotate: ");
         right.motorControl(speed);
         left.motorControl(-speed);
-        Serial.println(speed);
     }
 
     void stop() {
         right.stop();
         left.stop();
-        Serial.println("Stop");
     }
 
     void curve(int speed, double form) {
-        if (form > 0) {
+        if (form >= 0) {
             right.motorControl(speed);
             left.motorControl(speed / pow(2, form));
         } else {
+            form = abs(form);
             right.motorControl(speed / pow(2, form));
             left.motorControl(speed);
         }
@@ -74,11 +71,4 @@ void setup() {
 }
 
 void loop() {
-    speed = 100;
-    car.move(speed);
-    delay(2000);
-    car.curve(speed, -1);
-    delay(2000);
-    car.curve(speed, 1);
-    delay(2000);
 }
