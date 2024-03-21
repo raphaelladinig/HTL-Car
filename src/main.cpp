@@ -1,3 +1,4 @@
+#include "FahrzeugLib.h"
 #include <Arduino.h>
 
 struct Motor {
@@ -21,7 +22,7 @@ void setup() {
     pinMode(right.pwm, OUTPUT);
     pinMode(left.pin, OUTPUT);
     pinMode(left.pwm, OUTPUT);
-
+    
     speed = 255;
 
     Serial.begin(9600);
