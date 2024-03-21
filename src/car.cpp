@@ -1,12 +1,12 @@
 #include "car.h"
 
-void Car::move(int speed) {
+void Car::move() {
     right.move(speed);
     left.move(speed);
     Serial.println(speed);
 }
 
-void Car::rotate(int speed) {
+void Car::rotate() {
     right.move(speed);
     left.move(-speed);
 }
@@ -16,7 +16,7 @@ void Car::stop() {
     left.stop();
 }
 
-void Car::curve(int speed, double form) {
+void Car::curve(double form) {
     if (form >= 0) {
         right.move(speed);
         left.move(speed / pow(2, form));

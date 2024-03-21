@@ -5,9 +5,8 @@
 #include <car.h>
 
 // Pin 3 and 5 are PWM capable
-Car car = {{2, 3}, {4, 5}};
+Car car = {{2, 3}, {4, 5}, 255};
 SoftwareSerial bt(10, 11);
-int speed = 0;
 
 void setup() {
     pinMode(car.right.noPwm, OUTPUT);
@@ -15,14 +14,25 @@ void setup() {
     pinMode(car.left.noPwm, OUTPUT);
     pinMode(car.left.pwm, OUTPUT);
 
-    speed = 255;
-
     bt.begin(9600);
 }
 
 void loop() {
     Value value = btQuery(bt);
     switch (value.id) {
-        
+    case 'G': // Go
+        car.move();
+        break;
+    case 'S': // Stop
+        car.stop();
+        break;
+    case 'R': // Reverse
+        car.speed = -car.speed;
+        break;
+    case 'V': // Velocity
+        car.speed = value.value;
+        break;
+    case 'Y': // Curve
+        break;
     }
 }

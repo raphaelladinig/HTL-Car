@@ -7,11 +7,12 @@
 struct Car {
     Motor right;
     Motor left;
+    int speed;
     
-    void move(int speed);
-    void rotate(int speed);
+    void move();
+    void rotate();
     void stop();
-    void curve(int speed, double form);
+    void curve(double form);
 };
 
 #endif
