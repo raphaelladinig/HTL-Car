@@ -5,7 +5,7 @@
 #include <car.h>
 
 // Pin 3 and 5 are PWM capable
-Car car = {{2, 3}, {4, 5}, 255};
+Car car = {{2, 3}, {4, 5}, 0};
 SoftwareSerial bt(10, 11);
 
 void setup() {
