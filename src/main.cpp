@@ -1,56 +1,6 @@
 #include <Arduino.h>
-
-struct Motor {
-    int noPwm;
-    int pwm;
-
-    void motorControl(int speed) {
-        if (speed > 0) {
-            digitalWrite(noPwm, 0);
-            analogWrite(pwm, speed);
-        } else {
-            digitalWrite(noPwm, 1);
-            analogWrite(pwm, (255 + speed));
-        }
-    }
-
-    void stop() {
-        digitalWrite(noPwm, 0);
-        digitalWrite(pwm, 0);
-    }
-};
-
-struct Car {
-    Motor right;
-    Motor left;
-
-    void move(int speed) {
-        right.motorControl(speed);
-        left.motorControl(speed);
-        Serial.println(speed);
-    }
-
-    void rotate(int speed) {
-        right.motorControl(speed);
-        left.motorControl(-speed);
-    }
-
-    void stop() {
-        right.stop();
-        left.stop();
-    }
-
-    void curve(int speed, double form) {
-        if (form >= 0) {
-            right.motorControl(speed);
-            left.motorControl(speed / pow(2, form));
-        } else {
-            form = abs(form);
-            right.motorControl(speed / pow(2, form));
-            left.motorControl(speed);
-        }
-    } 
-};
+#include <car.h>
+#include <motor.h>
 
 // Pin 3 and 5 are PWM capable
 Car car = {{2, 3}, {4, 5}};
