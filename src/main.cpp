@@ -19,23 +19,25 @@ void setup() {
 
 void loop() {
     Value value = btQuery(bt);
-    switch (value.id) {
-    case 'G': // Go
-        car.speed = abs(car.speed);
-        car.move();
-        break;
-    case 'S': // Stop
-        car.stop();
-        break;
-    case 'R': // Reverse
-        car.speed = -abs(car.speed);
-        car.move();
-        break;
-    case 'V': // Velocity
-        car.speed = value.value;
-        break;
-    case 'Y': // Curve
-        car.curve(value.value);
-        break;
+    if (value.id != 0) {
+        switch (value.id) {
+        case 'G': // Go
+            car.speed = abs(car.speed);
+            car.move();
+            break;
+        case 'S': // Stop
+            car.stop();
+            break;
+        case 'R': // Reverse
+            car.speed = -abs(car.speed);
+            car.move();
+            break;
+        case 'V': // Velocity
+            car.speed = value.value;
+            break;
+        case 'Y': // Curve
+            car.curve(value.value);
+            break;
+        }
     }
 }
