@@ -12,6 +12,7 @@ int speed = 0;
 void motorControl(Motor motor, int speed);
 void forward(int speed);
 void backward(int speed);
+void rotate(int speed, bool direction);
 
 //---------------------------------------------------------------------------------
 
@@ -58,4 +59,8 @@ void backward(int speed) {
     motorControl(left, -speed);
     Serial.print("Backward: ");
     Serial.println(speed);
+}
+
+void rotate(int speed, bool direction) {
+
 }
