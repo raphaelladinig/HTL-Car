@@ -33,6 +33,7 @@ void loop() {
         car.speed = value.value;
         break;
     case 'Y': // Curve
+        car.curve(value.value);
         break;
     }
 }
