@@ -1,8 +1,8 @@
 #include <Arduino.h>
 
 struct Motor {
-    int in;
-    int out;
+    int pin1;
+    int pin2;
 };
 
 const Motor right = {2, 3};
@@ -16,10 +16,10 @@ void rotate(int speed);
 //---------------------------------------------------------------------------------
 
 void setup() {
-    pinMode(right.in, OUTPUT);
-    pinMode(right.out, OUTPUT);
-    pinMode(left.in, OUTPUT);
-    pinMode(left.out, OUTPUT);
+    pinMode(right.pin1, OUTPUT);
+    pinMode(right.pin2, OUTPUT);
+    pinMode(left.pin1, OUTPUT);
+    pinMode(left.pin2, OUTPUT);
 
     speed = 255;
 
@@ -38,11 +38,11 @@ void loop() {
 
 void motorControl(Motor motor, int speed) {
     if (speed > 0) {
-        analogWrite(motor.in, speed);
-        analogWrite(motor.out, 0);
+        analogWrite(motor.pin1, speed);
+        analogWrite(motor.pin2, 0);
     } else {
-        analogWrite(motor.in, 0);
-        analogWrite(motor.out, abs(speed));
+        analogWrite(motor.pin1, 0);
+        analogWrite(motor.pin2, abs(speed));
     }
 }
 
