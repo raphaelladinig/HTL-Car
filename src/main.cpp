@@ -10,9 +10,8 @@ const Motor left = {4, 5};
 int speed = 0;
 
 void motorControl(Motor motor, int speed);
-void forward(int speed);
-void backward(int speed);
-void rotate(int speed, bool direction);
+void straight(int speed);
+void rotate(int speed);
 
 //---------------------------------------------------------------------------------
 
@@ -29,9 +28,9 @@ void setup() {
 }
 
 void loop() {
-    forward(speed);
+    straight(speed);
     delay(5000);
-    backward(speed);
+    straight(-speed);
     delay(5000);
 }
 
@@ -47,20 +46,16 @@ void motorControl(Motor motor, int speed) {
     }
 }
 
-void forward(int speed) {
+void straight(int speed) {
     motorControl(right, speed);
     motorControl(left, speed);
     Serial.print("Forward: ");
     Serial.println(speed);
 }
 
-void backward(int speed) {
-    motorControl(right, -speed);
+void rotate(int speed) {
+    motorControl(right, speed);
     motorControl(left, -speed);
-    Serial.print("Backward: ");
+    Serial.print("Rotate: ");
     Serial.println(speed);
-}
-
-void rotate(int speed, bool direction) {
-
 }
