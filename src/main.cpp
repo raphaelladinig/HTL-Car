@@ -9,6 +9,7 @@ const Motor right = {2, 3};
 const Motor left = {4, 5};
 
 void forward(Motor motor);
+void backward(Motor motor);
 
 //---------------------------------------------------------------------------------
 
@@ -24,8 +25,10 @@ void setup() {
 
 void loop() {
     forward(right);
-    delay(5000);
     forward(left);
+    delay(5000);
+    backward(right);
+    backward(left);
 }
 
 //---------------------------------------------------------------------------------
@@ -33,4 +36,9 @@ void loop() {
 void forward(Motor motor) {
     analogWrite(motor.in, 255);
     analogWrite(motor.out, 0);
+}
+
+void backward(Motor motor) {
+    analogWrite(motor.in, 0);
+    analogWrite(motor.out, 255);
 }
