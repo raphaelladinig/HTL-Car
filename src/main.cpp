@@ -1,11 +1,12 @@
 #include <Arduino.h>
 
 struct Motor {
-    int noPWM;
-    int PWM;
+    int pin;
+    int pwm;
 };
 
-const Motor right = {2, 3}; // Pin 3 and 5 are PWM capable
+// Pin 3 and 5 are PWM capable
+const Motor right = {2, 3};
 const Motor left = {4, 5};
 int speed = 0;
 
@@ -16,10 +17,10 @@ void rotate(int speed);
 //---------------------------------------------------------------------------------
 
 void setup() {
-    pinMode(right.noPWM, OUTPUT);
-    pinMode(right.PWM, OUTPUT);
-    pinMode(left.noPWM, OUTPUT);
-    pinMode(left.PWM, OUTPUT);
+    pinMode(right.pin, OUTPUT);
+    pinMode(right.pwm, OUTPUT);
+    pinMode(left.pin, OUTPUT);
+    pinMode(left.pwm, OUTPUT);
 
     speed = 255;
 
@@ -38,11 +39,11 @@ void loop() {
 
 void motorControl(Motor motor, int speed) {
     if (speed > 0) {
-        digitalWrite(motor.noPWM, 0);
-        analogWrite(motor.PWM, speed);
+        digitalWrite(motor.pin, 0);
+        analogWrite(motor.pwm, speed);
     } else {
-        digitalWrite(motor.noPWM, 1);
-        analogWrite(motor.PWM, (255+speed));
+        digitalWrite(motor.pin, 1);
+        analogWrite(motor.pwm, (255 + speed));
     }
 }
 
