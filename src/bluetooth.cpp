@@ -9,7 +9,7 @@ String btValueString = "";
 float btValue;
 
 Value btQuery(SoftwareSerial bt) {
-   Value result = {0, 0};
+    Value result = {0, 0};
 
     btNewReading = false;
     if (bt.available()) {
@@ -31,6 +31,6 @@ Value btQuery(SoftwareSerial bt) {
             }
         }
     }
- 
-   return result;
+
+    return result;
 }
