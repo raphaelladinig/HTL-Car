@@ -14,14 +14,14 @@ Value btQuery(SoftwareSerial bt) {
     btNewReading = false;
     if (bt.available()) {
         btChar = bt.read();
-        Serial.write(btChar);
         if (btIdExpected) {
             btIdTemp = btChar;
             btIdExpected = false;
             btValueString = "";
         } else {
-            if ((btChar != ' ') && (btChar != '\n'))
+            if ((btChar != ' ') && (btChar != '\n')) {
                 btValueString += btChar;
+            }
             if (btChar == '\n') {
                 result.id = btIdTemp;
                 result.value = btValueString.toFloat();
