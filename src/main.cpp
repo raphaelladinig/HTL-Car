@@ -1,6 +1,5 @@
 #include <Arduino.h>
 #include <car.h>
-#include <motor.h>
 
 // Pin 3 and 5 are PWM capable
 Car car = {{2, 3}, {4, 5}};
