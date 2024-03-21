@@ -11,7 +11,7 @@ int speed = 0;
 
 void motorControl(Motor motor, int speed);
 void straight(int speed);
-void rotate(int speed, bool clockwise);
+void rotate(int speed);
 
 //---------------------------------------------------------------------------------
 
@@ -53,16 +53,9 @@ void straight(int speed) {
     Serial.println(speed);
 }
 
-void rotate(int speed, bool clockwise) {
+void rotate(int speed) {
     Serial.print("Rotate: ");
-    if (clockwise) {
-        motorControl(right, speed);
-        motorControl(left, -speed);
-        Serial.print("Clockwise: ");
-    } else {
-        motorControl(right, -speed);
-        motorControl(left, speed);
-        Serial.print("Counter-clockwise: ");
-    }
+    motorControl(right, speed);
+    motorControl(left, -speed);
     Serial.println(speed);
 }
