@@ -9,7 +9,7 @@ String btValueString = "";
 float btValue;
 
 Value btQuery(SoftwareSerial bt) {
-   Value result;
+   Value result = {0, 0};
 
     btNewReading = false;
     if (bt.available()) {
@@ -23,8 +23,8 @@ Value btQuery(SoftwareSerial bt) {
             if ((btChar != ' ') && (btChar != '\n'))
                 btValueString += btChar;
             if (btChar == '\n') {
-                btId = btIdTemp;
-                btValue = btValueString.toFloat();
+                result.id = btIdTemp;
+                result.value = btValueString.toFloat();
                 btValueString = "";
                 btIdExpected = true;
                 btNewReading = true;
