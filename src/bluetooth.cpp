@@ -1,6 +1,6 @@
 #include <bluetooth.h>
 
-String btQuery(SoftwareSerial bt) {
+Value btQuery(SoftwareSerial bt) {
 
 }
 

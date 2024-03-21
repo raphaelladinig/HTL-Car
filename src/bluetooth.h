@@ -3,6 +3,11 @@
 
 #include <SoftwareSerial.h>
 
-String btQuery(SoftwareSerial bt);
+struct Value {
+  char id;
+  int value;
+};
+
+Value btQuery(SoftwareSerial bt);
 
 #endif
