@@ -1,8 +1,8 @@
 #include "SoftwareSerial.h"
+#include "bluetooth.h"
+#include "car.h"
 #include "motor.h"
 #include <Arduino.h>
-#include <bluetooth.h>
-#include <car.h>
 
 // Pin 3 and 5 are PWM capable
 Car car = {{2, 3}, {4, 5}, 0};
