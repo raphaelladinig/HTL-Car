@@ -1,9 +1,11 @@
 #include "car.h"
 
 void Car::move() {
-    right.move(speed);
-    left.move(speed);
-    Serial.println(speed);
+    if (safe()) {
+        right.move(speed);
+        left.move(speed);
+        Serial.println(speed);
+    }
 }
 
 void Car::rotate() {
@@ -24,5 +26,14 @@ void Car::curve(double form) {
         form = abs(form);
         right.move(speed / pow(2, form));
         left.move(speed);
+    }
+}
+
+bool Car::safe() {
+    if (ultrasonicLeft.safe() && ultrasonicMiddle.safe() &&
+        ultrasonicRight.safe()) {
+        return true;
+    } else {
+        return false;
     }
 }

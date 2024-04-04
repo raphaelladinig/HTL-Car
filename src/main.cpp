@@ -5,7 +5,7 @@
 #include <Arduino.h>
 
 // Pin 3 and 5 are PWM capable
-Car car = {{2, 3}, {4, 5}, 0};
+Car car = {{2, 3}, {4, 5}, {6, 7}, {8, 9}, {11, 12}, 0};
 SoftwareSerial bt(10, 11);
 
 void setup() {
