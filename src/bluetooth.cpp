@@ -1,4 +1,5 @@
 #include "bluetooth.h"
+#include "SoftwareSerial.h"
 
 char btChar = ' ';
 char btId = ' ';
@@ -25,6 +26,9 @@ Value btQuery(SoftwareSerial bt) {
             if (btChar == '\n') {
                 result.id = btIdTemp;
                 result.value = btValueString.toFloat();
+                Serial.print(result.id);
+                Serial.print(" ");
+                Serial.println(result.value);
                 btValueString = "";
                 btIdExpected = true;
                 btNewReading = true;

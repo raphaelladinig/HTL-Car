@@ -6,7 +6,7 @@
 
 // Pin 3 and 5 are PWM capable
 Car car = {{2, 3}, {4, 5}, {6, 7}, {8, 9}, {11, 12}, 0};
-SoftwareSerial bt(10, 11);
+SoftwareSerial bt(10, 0);
 
 void setup() {
     pinMode(car.right.noPwm, OUTPUT);
@@ -20,7 +20,8 @@ void setup() {
     pinMode(car.ultrasonicMiddle.echo, OUTPUT);
     pinMode(car.ultrasonicMiddle.trig, INPUT);
 
-    bt.begin(9600);
+    Serial.begin(9600);
+    Serial.println("Car started");
 }
 
 void loop() {
