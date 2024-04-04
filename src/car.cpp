@@ -1,14 +1,11 @@
 #include "car.h"
 
 void Car::move() {
-    right.move(speed);
-    left.move(speed);
-    Serial.println(speed);
-    // if (safe()) {
-    //     right.move(speed);
-    //     left.move(speed);
-    //     Serial.println(speed);
-    // }
+    if (safe()) {
+        right.move(speed);
+        left.move(speed);
+        Serial.println(speed);
+    }
 }
 
 void Car::rotate() {
