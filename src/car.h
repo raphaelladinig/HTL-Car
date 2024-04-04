@@ -12,10 +12,10 @@ struct Car {
     Ultrasonic ultrasonicMiddle;
     Ultrasonic ultrasonicLeft;
     int speed;
-    void move();
-    void rotate();
+
     void stop();
-    void curve(double form);
+    void go();
+    void move(double form);
     bool safe();
 };
 

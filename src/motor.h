@@ -6,9 +6,9 @@
 struct Motor {
     int noPwm;
     int pwm;
+    bool stopped;
     
     void move(int speed);
-    void stop();
 };
 
 #endif
