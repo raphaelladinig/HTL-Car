@@ -26,10 +26,5 @@ void Car::go() {
 }
 
 bool Car::safe() {
-    if (ultrasonicLeft.safe() && ultrasonicMiddle.safe() &&
-        ultrasonicRight.safe()) {
-        return true;
-    } else {
-        return false;
-    }
+    return ultrasonicLeft.distance() > 5  && ultrasonicMiddle.distance() > 10 && ultrasonicRight.distance() > 5;
 }

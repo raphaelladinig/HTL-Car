@@ -8,7 +8,6 @@ struct Ultrasonic {
     int echo;
     
     double distance();
-    bool safe();
 };
 
 #endif

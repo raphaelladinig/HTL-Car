@@ -9,7 +9,3 @@ double Ultrasonic::distance() {
     
     return pulseIn(echo, HIGH) / 58.0;
 }
-
-bool Ultrasonic::safe() {
-    return distance() > 5;
-}
