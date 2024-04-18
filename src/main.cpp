@@ -26,12 +26,12 @@ void setup() {
     pinMode(car.right.pwm, OUTPUT);
     pinMode(car.left.noPwm, OUTPUT);
     pinMode(car.left.pwm, OUTPUT);
-    pinMode(car.ultrasonicLeft.echo, OUTPUT);
-    pinMode(car.ultrasonicLeft.trig, INPUT);
-    pinMode(car.ultrasonicRight.echo, OUTPUT);
-    pinMode(car.ultrasonicRight.trig, INPUT);
-    pinMode(car.ultrasonicMiddle.echo, OUTPUT);
-    pinMode(car.ultrasonicMiddle.trig, INPUT);
+    pinMode(car.ultrasonicLeft.trig, OUTPUT);
+    pinMode(car.ultrasonicLeft.echo, INPUT);
+    pinMode(car.ultrasonicRight.trig, OUTPUT);
+    pinMode(car.ultrasonicRight.echo, INPUT);
+    pinMode(car.ultrasonicMiddle.trig, OUTPUT);
+    pinMode(car.ultrasonicMiddle.echo, INPUT);
 
     bt.begin(9600);
     Serial.begin(9600);
