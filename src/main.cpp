@@ -39,6 +39,7 @@ void setup() {
 }
 
 void loop() {
+    delay(1000);
     Value value = btQuery();
     if (value.id != 0) {
         switch (value.id) {

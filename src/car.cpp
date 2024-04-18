@@ -1,17 +1,13 @@
 #include "car.h"
 
 void Car::move(double form) {
-    if (safe()) {
-        if (form >= 0) {
-            right.move(speed);
-            left.move(speed / pow(2, form));
-        } else {
-            form = abs(form);
-            right.move(speed / pow(2, form));
-            left.move(speed);
-        }
+    if (form >= 0) {
+        right.move(speed);
+        left.move(speed / pow(2, form));
     } else {
-        stop();
+        form = abs(form);
+        right.move(speed / pow(2, form));
+        left.move(speed);
     }
 }
 
@@ -26,5 +22,6 @@ void Car::go() {
 }
 
 bool Car::safe() {
-    return ultrasonicLeft.distance() > 5  && ultrasonicMiddle.distance() > 10 && ultrasonicRight.distance() > 5;
+    return ultrasonicLeft.distance() > 5 && ultrasonicMiddle.distance() > 10 &&
+           ultrasonicRight.distance() > 5;
 }
