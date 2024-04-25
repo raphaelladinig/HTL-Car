@@ -21,7 +21,12 @@ void Car::go() {
     left.stopped = false;
 }
 
-bool Car::safe() {
-    return ultrasonicLeft.distance() > 5 && ultrasonicMiddle.distance() > 10 &&
-           ultrasonicRight.distance() > 5;
+void Car::rotate(int direction) {
+    if (direction > 0) {
+        right.move(direction);
+        left.move(-direction);
+    } else {
+        right.move(-direction);
+        left.move(direction);
+    }
 }

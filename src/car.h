@@ -16,7 +16,7 @@ struct Car {
     void stop();
     void go();
     void move(double form);
-    bool safe();
+    void rotate(int direction);
 };
 
 #endif

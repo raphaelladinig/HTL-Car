@@ -2,4 +2,4 @@
   <h1>HTL-Car</h1>
 </div>
 
-Bluetooth
+Automatic
