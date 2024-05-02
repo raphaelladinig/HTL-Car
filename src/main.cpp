@@ -85,6 +85,7 @@ void loop() {
                        10.0;
             }
         }
+
         if (car.ultrasonicMiddle.distance() < turnDistance) {
             car.speed = -abs(car.speed);
         } else if (car.ultrasonicMiddle.distance() > turnDistance + 10) {
