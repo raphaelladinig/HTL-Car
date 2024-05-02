@@ -23,6 +23,7 @@ float btValue;
 Value btQuery();
 
 int curveDistance = 75;
+int turnDistance = 25;
 
 void setup() {
     // setup car
@@ -83,6 +84,11 @@ void loop() {
                             curveDistance * 0.5, 0, curveDistance * 2) /
                        10.0;
             }
+        }
+        if (car.ultrasonicMiddle.distance() < turnDistance) {
+            car.speed = -abs(car.speed);
+        } else if (car.ultrasonicMiddle.distance() > turnDistance + 10) {
+            car.speed = abs(car.speed);
         }
 
         car.move(form);
