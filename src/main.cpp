@@ -23,7 +23,7 @@ float btValue;
 Value btQuery();
 
 int curveDistance = 75;
-int turnDistance = 25;
+int turnDistance = 15;
 
 void setup() {
     // setup car
@@ -77,16 +77,18 @@ void loop() {
             if (car.ultrasonicLeft.distance() <
                 car.ultrasonicRight.distance()) {
                 form = map(car.ultrasonicLeft.distance(), 0,
-                           curveDistance * 0.5, 0, curveDistance * 2) /
+                           curveDistance * 0.5, 0, curveDistance * 1.5) /
                        10.0;
             } else {
                 form = -map(car.ultrasonicRight.distance(), 0,
-                            curveDistance * 0.5, 0, curveDistance * 2) /
+                            curveDistance * 0.5, 0, curveDistance * 1.5) /
                        10.0;
             }
         }
 
-        if (car.ultrasonicMiddle.distance() < turnDistance) {
+        if (car.ultrasonicLeft.distance() < turnDistance ||
+            car.ultrasonicMiddle.distance() < turnDistance ||
+            car.ultrasonicMiddle.distance() < turnDistance) {
             car.speed = -abs(car.speed);
         } else if (car.ultrasonicMiddle.distance() > turnDistance + 10) {
             car.speed = abs(car.speed);
