@@ -9,7 +9,7 @@ const String mode = "auto"; // bt or auto
 Car car = {{2, 3, false}, {4, 5, false}, {6, 7}, {8, 9}, {11, 12}, 255};
 
 SoftwareSerial bt(10, 0);
-struct Value {
+struct Signal {
     char id;
     int value;
 };
@@ -20,7 +20,7 @@ bool btIdExpected = true;
 bool btNewReading = false;
 String btValueString = "";
 float btValue;
-Value btQuery();
+Signal btQuery();
 
 int curveDistance = 75;
 int turnDistance = 15;
@@ -46,9 +46,9 @@ void setup() {
 
 void loop() {
     if (mode == "bt") {
-        Value value = btQuery();
-        if (value.id != 0) {
-            switch (value.id) {
+        Signal s = btQuery();
+        if (s.id != 0) {
+            switch (s.id) {
             case 'G': // Go
                 car.speed = abs(car.speed);
                 car.go();
@@ -61,10 +61,10 @@ void loop() {
                 car.go();
                 break;
             case 'V': // Velocity
-                car.speed = value.value;
+                car.speed = s.value;
                 break;
             case 'Y': // Curve
-                car.move(value.value);
+                car.move(s.value);
                 break;
             }
         }
@@ -98,8 +98,8 @@ void loop() {
     }
 }
 
-Value btQuery() {
-    Value result = {0, 0};
+Signal btQuery() {
+    Signal result = {0, 0};
 
     btNewReading = false;
     if (bt.available()) {
