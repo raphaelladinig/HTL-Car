@@ -73,19 +73,19 @@ void loop() {
 
                 strip.clear();
                 if (car.speed < 0) {
-                    strip.setPixelColor(5, Adafruit_NeoPixel::Color(0, 255, 0));
-                    strip.setPixelColor(6, Adafruit_NeoPixel::Color(0, 255, 0));
-                    strip.setPixelColor(7, Adafruit_NeoPixel::Color(0, 255, 0));
-                    strip.setPixelColor(8, Adafruit_NeoPixel::Color(0, 255, 0));
-                    strip.setPixelColor(9, Adafruit_NeoPixel::Color(0, 255, 0));
+                    strip.setPixelColor(5, strip.Color(0, 255, 0));
+                    strip.setPixelColor(6, strip.Color(0, 255, 0));
+                    strip.setPixelColor(7, strip.Color(0, 255, 0));
+                    strip.setPixelColor(8, strip.Color(0, 255, 0));
+                    strip.setPixelColor(9, strip.Color(0, 255, 0));
                     Serial.println("test");
                 } else if (s.value < 0) {
-                    strip.setPixelColor(3, Adafruit_NeoPixel::Color(0, 255, 0));
-                    strip.setPixelColor(4, Adafruit_NeoPixel::Color(0, 255, 0));
+                    strip.setPixelColor(3, strip.Color(0, 255, 0));
+                    strip.setPixelColor(4, strip.Color(0, 255, 0));
                     Serial.println("test2");
                 } else if (s.value > 0) {
-                    strip.setPixelColor(0, Adafruit_NeoPixel::Color(0, 255, 0));
-                    strip.setPixelColor(1, Adafruit_NeoPixel::Color(0, 255, 0));
+                    strip.setPixelColor(0, strip.Color(0, 255, 0));
+                    strip.setPixelColor(1, strip.Color(0, 255, 0));
                     Serial.println("test1");
                 }
                 break;
@@ -116,7 +116,7 @@ void loop() {
         } else if (car.ultrasonicMiddle.distance() > turnDistance + 10) {
             car.speed = abs(car.speed);
         }
-        
+
         strip.clear();
         if (car.speed < 0) {
             strip.setPixelColor(5, Adafruit_NeoPixel::Color(0, 255, 0));
