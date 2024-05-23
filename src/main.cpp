@@ -1,13 +1,18 @@
+#include "Adafruit_NeoPixel.h"
 #include "HardwareSerial.h"
 #include "SoftwareSerial.h"
 #include "car.h"
 #include <Arduino.h>
 
-const String mode = "auto"; // bt or auto
+const String mode = "bt"; // bt or auto
 
 // Pin 3 and 5 are PWM capable
-Car car = {{2, 3, false}, {4, 5, false}, {6, 7}, {8, 9}, {11, 12}, 255};
-
+Car car = {
+    {2, 3, false}, {4, 5, false}, {6, 7}, {8, 9}, {11, 12}, 255,
+};
+unsigned long timeout = millis();
+// in here because libaries are shit
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(10, 13, NEO_GRB + NEO_KHZ800);
 SoftwareSerial bt(10, 0);
 struct Signal {
     char id;
@@ -40,7 +45,7 @@ void setup() {
 
     bt.begin(9600);
     Serial.begin(9600);
-
+    strip.begin();
     Serial.println("Car started");
 }
 
@@ -65,6 +70,24 @@ void loop() {
                 break;
             case 'Y': // Curve
                 car.move(s.value);
+
+                strip.clear();
+                if (car.speed < 0) {
+                    strip.setPixelColor(5, Adafruit_NeoPixel::Color(0, 255, 0));
+                    strip.setPixelColor(6, Adafruit_NeoPixel::Color(0, 255, 0));
+                    strip.setPixelColor(7, Adafruit_NeoPixel::Color(0, 255, 0));
+                    strip.setPixelColor(8, Adafruit_NeoPixel::Color(0, 255, 0));
+                    strip.setPixelColor(9, Adafruit_NeoPixel::Color(0, 255, 0));
+                    Serial.println("test");
+                } else if (s.value < 0) {
+                    strip.setPixelColor(3, Adafruit_NeoPixel::Color(0, 255, 0));
+                    strip.setPixelColor(4, Adafruit_NeoPixel::Color(0, 255, 0));
+                    Serial.println("test2");
+                } else if (s.value > 0) {
+                    strip.setPixelColor(0, Adafruit_NeoPixel::Color(0, 255, 0));
+                    strip.setPixelColor(1, Adafruit_NeoPixel::Color(0, 255, 0));
+                    Serial.println("test1");
+                }
                 break;
             }
         }
@@ -93,8 +116,27 @@ void loop() {
         } else if (car.ultrasonicMiddle.distance() > turnDistance + 10) {
             car.speed = abs(car.speed);
         }
+        
+        strip.clear();
+        if (car.speed < 0) {
+            strip.setPixelColor(5, Adafruit_NeoPixel::Color(0, 255, 0));
+            strip.setPixelColor(6, Adafruit_NeoPixel::Color(0, 255, 0));
+            strip.setPixelColor(7, Adafruit_NeoPixel::Color(0, 255, 0));
+            strip.setPixelColor(8, Adafruit_NeoPixel::Color(0, 255, 0));
+            strip.setPixelColor(9, Adafruit_NeoPixel::Color(0, 255, 0));
+        } else if (form < 0) {
+            strip.setPixelColor(3, Adafruit_NeoPixel::Color(0, 255, 0));
+            strip.setPixelColor(4, Adafruit_NeoPixel::Color(0, 255, 0));
+        } else if (form > 0) {
+            strip.setPixelColor(0, Adafruit_NeoPixel::Color(0, 255, 0));
+            strip.setPixelColor(1, Adafruit_NeoPixel::Color(0, 255, 0));
+        }
 
         car.move(form);
+    }
+    if ((timeout + 50) < millis()) {
+        strip.show();
+        timeout = millis();
     }
 }
 

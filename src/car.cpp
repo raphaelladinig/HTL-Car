@@ -1,9 +1,10 @@
 #include "car.h"
 
 void Car::move(double form) {
-    if (form >= 0) {
+    if (form > 0) {
         right.move(speed);
         left.move(speed / pow(2, form));
+
     } else {
         form = abs(form);
         right.move(speed / pow(2, form));
