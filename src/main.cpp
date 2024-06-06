@@ -4,14 +4,15 @@
 #include "car.h"
 #include <Arduino.h>
 
-const String mode = "bt"; // bt or auto
+const String mode = "bt"; // NOTE: bt or auto
 
-// Pin 3 and 5 are PWM capable
+// NOTE: Pin 3 and 5 are PWM capable
 Car car = {
     {2, 3, false}, {4, 5, false}, {6, 7}, {8, 9}, {11, 12}, 255,
 };
+
 unsigned long timeout = millis();
-// in here because libaries are shit
+// HACK: Libaries stop working outside of main.cpp
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(10, 13, NEO_GRB + NEO_KHZ800);
 SoftwareSerial bt(10, 0);
 struct Signal {
@@ -29,9 +30,9 @@ Signal btQuery();
 
 int curveDistance = 75;
 int turnDistance = 15;
+void blink(int speed, int form);
 
 void setup() {
-    // setup car
     pinMode(car.right.noPwm, OUTPUT);
     pinMode(car.right.pwm, OUTPUT);
     pinMode(car.left.noPwm, OUTPUT);
@@ -70,24 +71,7 @@ void loop() {
                 break;
             case 'Y': // Curve
                 car.move(s.value);
-
-                strip.clear();
-                if (car.speed < 0) {
-                    strip.setPixelColor(5, strip.Color(0, 255, 0));
-                    strip.setPixelColor(6, strip.Color(0, 255, 0));
-                    strip.setPixelColor(7, strip.Color(0, 255, 0));
-                    strip.setPixelColor(8, strip.Color(0, 255, 0));
-                    strip.setPixelColor(9, strip.Color(0, 255, 0));
-                    Serial.println("test");
-                } else if (s.value < 0) {
-                    strip.setPixelColor(3, strip.Color(0, 255, 0));
-                    strip.setPixelColor(4, strip.Color(0, 255, 0));
-                    Serial.println("test2");
-                } else if (s.value > 0) {
-                    strip.setPixelColor(0, strip.Color(0, 255, 0));
-                    strip.setPixelColor(1, strip.Color(0, 255, 0));
-                    Serial.println("test1");
-                }
+                blink(car.speed, s.value);
                 break;
             }
         }
@@ -116,22 +100,8 @@ void loop() {
         } else if (car.ultrasonicMiddle.distance() > turnDistance + 10) {
             car.speed = abs(car.speed);
         }
-
-        strip.clear();
-        if (car.speed < 0) {
-            strip.setPixelColor(5, Adafruit_NeoPixel::Color(0, 255, 0));
-            strip.setPixelColor(6, Adafruit_NeoPixel::Color(0, 255, 0));
-            strip.setPixelColor(7, Adafruit_NeoPixel::Color(0, 255, 0));
-            strip.setPixelColor(8, Adafruit_NeoPixel::Color(0, 255, 0));
-            strip.setPixelColor(9, Adafruit_NeoPixel::Color(0, 255, 0));
-        } else if (form < 0) {
-            strip.setPixelColor(3, Adafruit_NeoPixel::Color(0, 255, 0));
-            strip.setPixelColor(4, Adafruit_NeoPixel::Color(0, 255, 0));
-        } else if (form > 0) {
-            strip.setPixelColor(0, Adafruit_NeoPixel::Color(0, 255, 0));
-            strip.setPixelColor(1, Adafruit_NeoPixel::Color(0, 255, 0));
-        }
-
+        
+        blink(car.speed, form);
         car.move(form);
     }
     if ((timeout + 50) < millis()) {
@@ -168,4 +138,21 @@ Signal btQuery() {
     }
 
     return result;
+}
+
+void blink(int speed, int form) {
+    strip.clear();
+    if (car.speed < 0) {
+        strip.setPixelColor(5, strip.Color(255, 0, 0));
+        strip.setPixelColor(6, strip.Color(255, 0, 0));
+        strip.setPixelColor(7, strip.Color(255, 0, 0));
+        strip.setPixelColor(8, strip.Color(255, 0, 0));
+        strip.setPixelColor(9, strip.Color(255, 0, 0));
+    } else if (form < 0) {
+        strip.setPixelColor(3, strip.Color(0, 255, 0));
+        strip.setPixelColor(4, strip.Color(0, 255, 0));
+    } else if (form > 0) {
+        strip.setPixelColor(0, strip.Color(0, 255, 0));
+        strip.setPixelColor(1, strip.Color(0, 255, 0));
+    }
 }
